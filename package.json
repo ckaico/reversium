@@ -43,10 +43,10 @@
   "homepage": "https://reversium.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/212adam/reversium.git"
+    "url": "git+https://github.com/ckaico/reversium.git"
   },
   "bugs": {
-    "url": "https://github.com/212adam/reversium/issues"
+    "url": "https://github.com/ckaico/reversium/issues"
   },
   "author": {
     "name": "Christian Kai",
