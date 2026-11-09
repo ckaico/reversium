@@ -2,7 +2,7 @@
   "name": "reversium",
   "version": "0.1.0",
   "description": "Reverse engineer everything you lawfully have. Saved, versioned blueprints and a build-and-compare loop, as an MCP server. Built on REA for software.",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "type": "module",
   "bin": {
     "reversium": "./bin/reversium.js"

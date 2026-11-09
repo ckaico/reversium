@@ -70,4 +70,4 @@ bun run build      # dist/index.js for the npm bin
 
 v0.1. Built on REA. Trademark and name clearance pending. First public teardown: coming.
 
-MIT.
+Apache 2.0. See [LICENSE](LICENSE) and [NOTICE](NOTICE). "Reversium" is a name, not part of the licence grant.
