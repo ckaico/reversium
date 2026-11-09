@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Reversium — Teardown: {{TITLE}}</title>
+  <meta name="description" content="Reversium teardown of {{TITLE}}: the blueprint, the loop, what you can rebuild.">
+  <meta name="color-scheme" content="dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; --bg:#09090b; --bg-2:#0f0f12; --hair:rgba(255,255,255,.08); --edge:rgba(255,255,255,.14); --fg:#f5f5f7; --fg-2:#a7a7b1; --fg-3:#6f6f7a; --win:#ffd9a0; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--fg); font-family:"Instrument Sans","Helvetica Neue",Arial,sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased; }
+    .wrap { max-width: 760px; margin: 0 auto; padding-block: 56px 80px; padding-left:max(20px,env(safe-area-inset-left,0px)); padding-right:max(20px,env(safe-area-inset-right,0px)); }
+    .mono { font-family:"Geist Mono",ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--fg-3); }
+    a { color: var(--fg-2); }
+    h1 { font-size: clamp(32px,5.5vw,52px); line-height:1.02; letter-spacing:-.035em; margin: 10px 0 14px; text-wrap: balance; }
+    .meta { font-family:"Geist Mono",ui-monospace,Menlo,monospace; font-size:12.5px; color:var(--fg-2); display:flex; gap:18px; flex-wrap:wrap; margin-bottom: 36px; }
+    .access { border:1px solid var(--edge); border-radius:12px; padding:14px 16px; color:var(--fg-2); font-size:15px; margin-bottom: 36px; }
+    .access b { color: var(--fg); }
+    .s { border-top:1px solid var(--hair); padding: 22px 0; display:grid; grid-template-columns: 110px 1fr; gap: 18px; }
+    .s h2 { margin:0; font-family:"Geist Mono",ui-monospace,Menlo,monospace; font-size:12px; letter-spacing:.08em; color:var(--win); font-weight:500; padding-top:4px; }
+    .s p { margin:0; color:var(--fg-2); font-size:16px; }
+    .s:first-of-type p { color: var(--fg); }
+    .video { margin: 28px 0 0; } .video a { display:inline-block; padding:10px 18px; border-radius:999px; background:var(--fg); color:var(--bg); text-decoration:none; font-weight:600; }
+    footer { margin-top: 48px; border-top:1px solid var(--hair); padding-top: 20px; font-family:"Geist Mono",ui-monospace,Menlo,monospace; font-size:12px; color:var(--fg-3); }
+    @media (max-width: 600px) { .s { grid-template-columns: 1fr; gap: 6px; } }
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <a class="mono" href="/">← Reversium</a>
+  <h1>{{TITLE}}</h1>
+  <div class="meta"><span>{{DATE}}</span><span>{{DOMAIN}}</span><span>blueprint v{{VERSION}}</span><span>submitted by {{SUBMITTER}}</span></div>
+  <div class="access"><b>Lawful access.</b> {{ACCESS}}</div>
+  {{BODY}}
+  {{VIDEO}}
+  <footer>Reversium · Built on <a href="https://github.com/morluto/rea" rel="noopener">REA</a> (MIT). Method, not footage; your hardware, not theirs; nothing circumvented. <a href="/aup">Acceptable use</a></footer>
+</main>
+</body>
+</html>
