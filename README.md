@@ -4,8 +4,6 @@
 
 An MCP server and agent skills that turn anything you lawfully have into a **saved, versioned blueprint** and run a **build-and-compare loop** until your version stands on its own. Software goes to [REA](https://github.com/morluto/rea) (MIT). Devices, film and ads, editing styles, viral formats, companies and your own site are Reversium's.
 
-<!-- 20-second result-first GIF goes here before launch. -->
-
 ```
 /reverse ./vendor-app.apk          → blueprint v1 (REA does the unpacking)
 /reverse "my wireless mic → iPhone" → device method: link, capture plan, bridge, parts
