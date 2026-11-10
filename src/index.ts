@@ -30,7 +30,7 @@ const AttestationSchema = z.object({
   noPrivateData: z.boolean().describe("True if nothing comes from behind a login, a leak or an NDA."),
 });
 
-const SectionsSchema = z.record(z.string()).describe(`Blueprint sections. Standard keys: ${SECTIONS.join(", ")}. Extra keys allowed (e.g. TRAFFIC, CUTS, REACH, PARTS).`);
+const SectionsSchema = z.record(z.string(), z.string()).describe(`Blueprint sections. Standard keys: ${SECTIONS.join(", ")}. Extra keys allowed (e.g. TRAFFIC, CUTS, REACH, PARTS).`);
 
 server.tool(
   "target_classify",
