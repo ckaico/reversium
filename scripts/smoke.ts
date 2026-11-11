@@ -38,5 +38,12 @@ await call("own_site_verify", { domain: "example.com" });
 await call("own_site_headers", { domain: "example.com" });
 await call("teardown_render", { slug: "wireless-mic-phone", submitter: "Christian" });
 
+const sc = (n: number) => ({ score: n, why: "checked against the public repo and two alternatives" });
+const thin = await call("verdict_save", { target: "demo tool", claim: "x", inside: "y", scores: { novelty: sc(1), edge: sc(1), moat: sc(0), substance: sc(3), freshness: sc(2), rebuild: sc(1) }, better: [], rebuildPlan: "z", sources: [{ url: "https://example.com", what: "readme" }] });
+if (!/Not saved/.test(thin)) throw new Error("expected verdict_save to reject thin input");
+const saved = await call("verdict_save", { target: "demo tool · https://example.com", claim: "Best matting ever.", inside: "Fine-tune of an open model.", scores: { novelty: sc(1), edge: sc(1), moat: sc(0), substance: sc(3), freshness: sc(2), rebuild: sc(1) }, better: [{ name: "Alt", url: "https://example.org", why: "better edges" }], rebuildPlan: "Use Alt.", sources: [{ url: "https://example.com", what: "readme" }, { url: "https://example.org", what: "benchmark" }] });
+if (!/Mostly branding/.test(saved)) throw new Error("expected Mostly branding");
+await call("verdict_list", {});
+
 console.log("\nproject dir:", cwd);
 await client.close();

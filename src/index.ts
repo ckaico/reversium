@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Reversium MCP server. Local-first. Stdio transport.
 // Tools: target.classify · blueprint.create/get/update/diff/list · loop.compare · rea.handoff ·
-//        own_site.challenge/verify/headers · teardown.render
+//        own_site.challenge/verify/headers · teardown.render · verdict.save/list
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { z } from "zod";
@@ -16,6 +16,7 @@ import { diffSections, renderDiff } from "./diff.js";
 import { writeReaTask } from "./rea.js";
 import { challenge, verify, headersRead, isVerified } from "./ownsite.js";
 import { renderTeardown } from "./render.js";
+import { SCORE_KEYS, SCORE_HELP, problems, saveVerdict, listVerdicts, type VerdictInput } from "./verdict.js";
 
 const server = new McpServer({ name: "reversium", version: "0.1.0" });
 
@@ -154,6 +155,35 @@ server.tool(
     return text(`Rendered ${out}`);
   },
 );
+
+const ScoreSchema = z.object({ score: z.number().int().min(0).max(5), why: z.string() });
+
+server.tool(
+  "verdict_save",
+  `Is it bullshit? Save a dated verdict on a public tool, repo or product. You do the research; the server checks it and computes the verdict. Scores 0–5, each with a reason: ${SCORE_KEYS.map((k) => `${k}: ${SCORE_HELP[k]}`).join(" ")} Rejects missing reasons, fewer than 2 sourced URLs, or an edge of 2 or lower with nothing named as better.`,
+  {
+    target: z.string().describe("Name and link, e.g. 'ponytail · https://github.com/…'"),
+    claim: z.string().describe("What it says it does, in its own framing."),
+    inside: z.string().describe("What it actually is: model, method, data, how much is original."),
+    scores: z.object(Object.fromEntries(SCORE_KEYS.map((k) => [k, ScoreSchema])) as Record<(typeof SCORE_KEYS)[number], typeof ScoreSchema>),
+    better: z.array(z.object({ name: z.string(), url: z.string(), why: z.string() })).describe("Stronger alternatives available now. Empty only if nothing beats it."),
+    rebuildPlan: z.string().describe("How to build an equal or better version today, with which public parts, and how long."),
+    sources: z.array(z.object({ url: z.string(), what: z.string() })).describe("Every URL you relied on and what it showed."),
+    slug: z.string().optional(),
+  },
+  async (input) => {
+    const p = problems(input as VerdictInput);
+    if (p.length) return text(`Not saved. Fix these first:\n${p.map((x) => `- ${x}`).join("\n")}`);
+    const r = await saveVerdict(input as VerdictInput);
+    return text(`Saved ${r.path}\n\n${r.md}`);
+  },
+);
+
+server.tool("verdict_list", "List saved verdicts in this project, newest first.", {}, async () => {
+  const all = await listVerdicts();
+  if (!all.length) return text("No verdicts yet. Run /bullshit <repo, link or name>.");
+  return text(all.map((v) => `${v.slug} · ${v.label} · ${v.total}/30 · v${v.version} · ${v.checked.slice(0, 10)} · ${v.target}`).join("\n"));
+});
 
 const transport = new StdioServerTransport();
 await server.connect(transport);

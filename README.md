@@ -11,6 +11,7 @@ An MCP server and agent skills that turn anything you lawfully have into a **sav
 /loop wireless-mic-phone            → your build vs. the blueprint; one change
 /blueprint diff wireless-mic-phone 1 3
 /teardown publish wireless-mic-phone
+/bullshit https://github.com/…/ponytail → is it as good as the hype? scored, dated verdict
 ```
 
 Every run ends in the same document shape: `TARGET · INSIDE · FOUND · PLAN · LOOP · RULES`, plus domain keys like `TRAFFIC`, `CUTS`, `REACH`, `PARTS`.
@@ -47,6 +48,7 @@ Skills: copy `skills/` into `.claude/skills/` (or install this repo as a plugin)
 | `rea_handoff` | writes a REA task file for software targets |
 | `own_site_challenge` · `verify` · `headers` | prove you own a domain, then one read-only headers check |
 | `teardown_render` | blueprint → static page for reversium.com |
+| `verdict_save` · `verdict_list` | "Is it bullshit?": scored, sourced, dated verdict on a public tool or repo; the server computes the label |
 
 ## What it won't do
 
